@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TübiSolver</title>
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+background:#0f172a;
+color:white;
+margin:0;
+}
+
+header{
+background:#1e293b;
+padding:25px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+}
+
+.subtitle{
+font-size:14px;
+opacity:0.8;
+margin-top:5px;
+}
+
+nav{
+text-align:center;
+background:#111827;
+padding:12px;
+}
+
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:30px;
+}
+
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.4);
+}
+
+.card h2{
+margin-top:0;
+}
+
+input{
+width:90%;
+padding:10px;
+margin:6px;
+border-radius:6px;
+border:none;
+}
+
+button{
+padding:10px 15px;
+margin-top:10px;
+border:none;
+border-radius:6px;
+background:#3b82f6;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#2563eb;
+}
+
+.result{
+margin-top:10px;
+font-weight:bold;
+}
+
+.about{
+padding:40px;
+background:#111827;
+text-align:center;
+}
+
+.about h2{
+font-size:26px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:#1e293b;
+font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+TübiSolver
+<div class="subtitle">Matematiğin Akıllı Çözümü</div>
+</header>
+
+<nav>
+<a href="#tools">Araçlar</a>
+<a href="#about">Biz Kimiz</a>
+</nav>
+
+<section id="tools" class="container">
+
+<div class="card">
+<h2>Bölünebilme</h2>
+<input id="sayi1" placeholder="Sayı">
+<input id="bolen" placeholder="Bölen">
+<br>
+<button onclick="bolunme()">Kontrol Et</button>
+<div id="bolunmeSonuc" class="result"></div>
+</div>
+
+<div class="card">
+<h2>Asal Sayı</h2>
+<input id="asalSayi" placeholder="Sayı">
+<br>
+<button onclick="asal()">Kontrol Et</button>
+<div id="asalSonuc" class="result"></div>
+</div>
+
+<div class="card">
+<h2>EBOB / EKOK</h2>
+<input id="n1" placeholder="1. sayı">
+<input id="n2" placeholder="2. sayı">
+<br>
+<button onclick="ebob()">EBOB</button>
+<button onclick="ekok()">EKOK</button>
+<div id="ebobSonuc" class="result"></div>
+</div>
+
+<div class="card">
+<h2>Hesap Makinesi</h2>
+<input id="a" placeholder="1. sayı">
+<input id="b" placeholder="2. sayı">
+<br>
+<button onclick="calc('+')">+</button>
+<button onclick="calc('-')">-</button>
+<button onclick="calc('*')">*</button>
+<button onclick="calc('/')">/</button>
+<div id="calcSonuc" class="result"></div>
+</div>
+
+</section>
+
+<section id="about" class="about">
+
+<h2>Biz Kimiz?</h2>
+
+<p>
+Biz <b>Gazi Üniversitesi Vakfı Özel Ortaokulu</b>'ndan 6. sınıf öğrencileriyiz.
+Bu proje <b>TÜBİTAK proje çalışması</b> kapsamında geliştirilmiştir.
+</p>
+
+<p>
+Projemizin adı <b>TübiSolver</b>'dır. TübiSolver, matematik işlemlerini
+daha kolay ve anlaşılır hale getirmek amacıyla geliştirilmiş bir araçtır.
+</p>
+
+<p>
+Projenin ilk versiyonu Arduino, LCD ekran ve keypad kullanılarak
+fiziksel bir cihaz olarak yapılmıştır. Daha sonra herkesin kolayca
+deneyebilmesi için web versiyonu geliştirilmiştir.
+</p>
+
+<p>
+Amacımız matematik işlemlerini daha kolay hale getirmek,
+elektronik ve yazılım öğrenmek ve projelerimizi teknoloji ile
+birleştirmektir.
+</p>
+
+</section>
+
+<footer>
+TübiSolver • TÜBİTAK Projesi • Gazi Üniversitesi Vakfı Özel Ortaokulu
+</footer>
+
+<script>
+
+function bolunme(){
+let a=document.getElementById("sayi1").value
+let b=document.getElementById("bolen").value
+
+if(a%b==0)
+document.getElementById("bolunmeSonuc").innerText="Bölünür"
+else
+document.getElementById("bolunmeSonuc").innerText="Bölünmez"
+}
+
+function asal(){
+let n=document.getElementById("asalSayi").value
+let prime=true
+
+for(let i=2;i<n;i++){
+if(n%i==0) prime=false
+}
+
+document.getElementById("asalSonuc").innerText=
+prime?"Asal Sayı":"Asal Değil"
+}
+
+function ebob(){
+let a=document.getElementById("n1").value
+let b=document.getElementById("n2").value
+
+while(b!=0){
+let t=b
+b=a%b
+a=t
+}
+
+document.getElementById("ebobSonuc").innerText="EBOB = "+a
+}
+
+function ekok(){
+let a=document.getElementById("n1").value
+let b=document.getElementById("n2").value
+
+let x=a,y=b
+
+while(y!=0){
+let t=y
+y=x%y
+x=t
+}
+
+let ekok=(a*b)/x
+
+document.getElementById("ebobSonuc").innerText="EKOK = "+ekok
+}
+
+function calc(op){
+let a=Number(document.getElementById("a").value)
+let b=Number(document.getElementById("b").value)
+
+let r
+
+if(op=="+") r=a+b
+if(op=="-") r=a-b
+if(op=="*") r=a*b
+if(op=="/") r=a/b
+
+document.getElementById("calcSonuc").innerText="Sonuç = "+r
+}
+
+</script>
+
+</body>
+</html>
