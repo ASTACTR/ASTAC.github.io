@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TübiSolver</title>
+<title>ASTAC</title>
 
 <style>
-
 body{
 font-family:Arial, sans-serif;
 background:#0f172a;
@@ -18,14 +17,15 @@ header{
 background:#1e293b;
 padding:25px;
 text-align:center;
-font-size:30px;
+font-size:32px;
 font-weight:bold;
 }
 
 .subtitle{
-font-size:14px;
-opacity:0.8;
-margin-top:5px;
+font-size:16px;
+opacity:0.85;
+margin-top:8px;
+color:#38bdf8;
 }
 
 nav{
@@ -53,10 +53,6 @@ background:#1e293b;
 padding:25px;
 border-radius:12px;
 box-shadow:0 5px 15px rgba(0,0,0,0.4);
-}
-
-.card h2{
-margin-top:0;
 }
 
 input{
@@ -92,25 +88,22 @@ background:#111827;
 text-align:center;
 }
 
-.about h2{
-font-size:26px;
-}
-
 footer{
 text-align:center;
 padding:20px;
 background:#1e293b;
 font-size:14px;
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-TübiSolver
-<div class="subtitle">Matematiğin Akıllı Çözümü</div>
+ASTAC
+<div class="subtitle">
+ASTAC – Sayılarla Düşünen Akıllı Teknoloji
+</div>
 </header>
 
 <nav>
@@ -171,26 +164,19 @@ Bu proje <b>TÜBİTAK proje çalışması</b> kapsamında geliştirilmiştir.
 </p>
 
 <p>
-Projemizin adı <b>TübiSolver</b>'dır. TübiSolver, matematik işlemlerini
-daha kolay ve anlaşılır hale getirmek amacıyla geliştirilmiş bir araçtır.
+Projemizin adı <b>ASTAC</b>'tır. ASTAC, matematik işlemlerini
+daha kolay ve anlaşılır hale getirmek amacıyla geliştirilmiştir.
 </p>
 
 <p>
 Projenin ilk versiyonu Arduino, LCD ekran ve keypad kullanılarak
-fiziksel bir cihaz olarak yapılmıştır. Daha sonra herkesin kolayca
-deneyebilmesi için web versiyonu geliştirilmiştir.
-</p>
-
-<p>
-Amacımız matematik işlemlerini daha kolay hale getirmek,
-elektronik ve yazılım öğrenmek ve projelerimizi teknoloji ile
-birleştirmektir.
+fiziksel bir cihaz olarak yapılmıştır. Daha sonra web versiyonu geliştirilmiştir.
 </p>
 
 </section>
 
 <footer>
-TübiSolver • TÜBİTAK Projesi • Gazi Üniversitesi Vakfı Özel Ortaokulu
+ASTAC • TÜBİTAK Projesi • Gazi Üniversitesi Vakfı Özel Ortaokulu
 </footer>
 
 <script>
@@ -208,6 +194,8 @@ document.getElementById("bolunmeSonuc").innerText="Bölünmez"
 function asal(){
 let n=document.getElementById("asalSayi").value
 let prime=true
+
+if(n<=1) prime=false
 
 for(let i=2;i<n;i++){
 if(n%i==0) prime=false
@@ -256,7 +244,13 @@ let r
 if(op=="+") r=a+b
 if(op=="-") r=a-b
 if(op=="*") r=a*b
-if(op=="/") r=a/b
+if(op=="/"){
+if(b==0){
+document.getElementById("calcSonuc").innerText="Sıfıra Bölünmez"
+return
+}
+r=a/b
+}
 
 document.getElementById("calcSonuc").innerText="Sonuç = "+r
 }
